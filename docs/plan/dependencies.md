@@ -6,6 +6,7 @@
 > - 늦어지면 **줄이는 순서**도 미리 정했습니다. 음성 → 준비 → 건네기 → 마무리 정리 → 안전은 끝까지 지킵니다.
 >
 > 관련: [workflow.md](../workflow.md) GO/NO-GO · [decisions.md](decisions.md) · [스프린트 보드](https://github.com/orgs/Gansoolgo/projects/1)
+> 📖 낯선 말은 👉 [용어집](../glossary.md)
 
 ---
 

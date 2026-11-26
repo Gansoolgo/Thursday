@@ -6,6 +6,7 @@
 > - 먼저 [#2 장비 사양 확인](https://github.com/Gansoolgo/Thursday/issues/2)으로 **이미 있는 것**을 지우고, 남은 것만 삽니다.
 >
 > 가격은 국내 온라인 기준 **대략적인 추정**입니다. 구매 전 실제 가격을 확인하세요. 진행은 [Issue #31](https://github.com/Gansoolgo/Thursday/issues/31)에서 체크합니다.
+> 📖 낯선 말은 👉 [용어집](../glossary.md)
 
 ---
 

@@ -6,6 +6,7 @@
 > - **어떻게** 개발할지(어떤 AI, 어떤 방식)는 각자 자유. 팀이 맞추는 건 Issue·브랜치·PR·인터페이스뿐입니다.
 >
 > Git 명령과 실수 복구는 👉 [Git 실전 가이드](docs/git-guide.md) · AI 활용은 👉 [AI에게 일 맡기는 법](docs/ai-guide.md)
+> 📖 낯선 말은 👉 [용어집](docs/glossary.md)
 
 ---
 

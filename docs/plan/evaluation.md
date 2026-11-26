@@ -6,6 +6,7 @@
 > - M4(12/15~17)는 3일뿐이라 **필수 측정만** 합니다. 기록은 처음부터 자동으로 쌓이게 만들어(`logs/trials.jsonl`), 시험만 돌리면 표가 나오게 합니다.
 >
 > 관련: [vision.md](../vision.md) 가설 · [decisions.md](decisions.md) · [workspace.md](workspace.md) · Issue #19·#20
+> 📖 낯선 말은 👉 [용어집](../glossary.md)
 
 ---
 

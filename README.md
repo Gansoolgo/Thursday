@@ -15,6 +15,7 @@
 |---|---|---|
 | **처음 보는 사람** (강사님 등) | 이 README → [시스템 아키텍처](docs/architecture.md) 1장 그림 | 5분 |
 | **팀원, 첫날** | 이 README → [협업 규칙](CONTRIBUTING.md) → [Git 실전 가이드](docs/git-guide.md) → [AI에게 일 맡기는 법](docs/ai-guide.md) | 30분 |
+| **용어가 어렵다면** | 📖 [용어집](docs/glossary.md) — 스프린트, PR, 브랜치 같은 말을 쉽게 풀어 둠 | 필요할 때 |
 | **팀원, 코드 짜기 전** | [인터페이스 규격](docs/interfaces.md)에서 내 모듈 부분 → 맡은 Issue | 10분 |
 | **AI 도구** | [AGENTS.md](AGENTS.md) (Claude Code는 자동으로 읽음) | — |
 
@@ -90,7 +91,8 @@ flowchart LR
 | [CONTRIBUTING.md](CONTRIBUTING.md) | 팀 규칙: Issue → 브랜치 → PR → 리뷰 → 병합 |
 | [git-guide.md](docs/git-guide.md) | Git·GitHub 실전: 처음 세팅, 하루 흐름, 실수 복구 |
 | [ai-guide.md](docs/ai-guide.md) | AI에게 일을 정확히 맡겨 수정을 줄이는 법, 복사용 프롬프트 |
-| [workflow.md](docs/workflow.md) | 일정, 애자일(스프린트·DoD·회고), GO/NO-GO |
+| [workflow.md](docs/workflow.md) | 일정, 일하는 방식(2~3일씩 반복), 12/02 판정 기준 |
+| [glossary.md](docs/glossary.md) | 📖 **용어집**: 낯선 말을 쉽게 |
 | [plan/decisions.md](docs/plan/decisions.md) | **결정 기록**: 무엇을 왜 정했나 |
 | [plan/edge-devices.md](docs/plan/edge-devices.md) | 엣지 AI 장치 20종 조사 (두뇌 장치 선택 근거) |
 | [plan/workspace.md](docs/plan/workspace.md) | 시연 물건 9종 · 작업대 칸 배치 · 작업 설명서 초안 |

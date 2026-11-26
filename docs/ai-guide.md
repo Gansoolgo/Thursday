@@ -6,6 +6,7 @@
 > - 순서는 **계획 먼저 → 테스트 먼저 → 구현 → 사람이 실행해서 확인.** 한 번에 크게 시키지 않습니다.
 >
 > 어떤 AI를 쓰든(Claude Code, Codex, ChatGPT) 같은 원칙입니다. AI가 지킬 규칙은 [AGENTS.md](../AGENTS.md)에 있습니다.
+> 📖 낯선 말은 👉 [용어집](glossary.md)
 
 ---
 
