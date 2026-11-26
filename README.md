@@ -53,6 +53,7 @@ flowchart LR
 | 계획·대화 | OpenVINO GenAI 로컬 LLM, JSON schema 제약 출력 |
 | 로봇 제어 | SO-101 + LeRobot, 역기구학(IK) 기반 pick/place, (선택) ACT 모방학습 |
 | 하드웨어 | Intel Core Ultra 5 225H (CPU·iGPU·NPU), SO-101, 웹캠 |
+| OS | Windows 11 |
 | 언어 | Python |
 
 ## 문서
