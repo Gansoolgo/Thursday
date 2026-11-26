@@ -33,6 +33,16 @@ Thursday — 작업실 AI 조수 로봇팔. 사용자 말 → 로컬 LLM 계획(
 - 명세가 모호하거나 `docs/interfaces.md`와 맞지 않으면 추측해서 채우지 말고 질문한다.
 - "계획만" 요청을 받으면 코드를 쓰지 않는다.
 
+## 작업이 끝나면 기록 초안을 쓴다
+
+사람은 기록을 자주 잊습니다. 그래서 **AI가 먼저 챙깁니다.** ([기록 가이드](docs/records.md))
+
+- 무언가를 **시험·측정**했으면: [실험 기록 양식](docs/records/templates/experiment.md)으로 `docs/records/experiments/날짜_Issue번호_내용.md` **초안을 만든다.** 실제로 실행한 명령·결과 숫자·에러 원문만 쓰고, 모르는 칸은 `(확인 필요)`로 남긴다. 숫자를 지어내지 않는다.
+- **사진·녹음 등 데이터**를 모으거나 바꿨으면: [데이터 카드 양식](docs/records/templates/data-card.md)으로 `docs/records/data/` 초안을 만든다.
+- **M1 Issue**라면 [results-m1.md](docs/plan/results-m1.md)의 해당 칸에 숫자를 채운다.
+- 초안을 만든 뒤 사람에게 **"기록 초안을 만들었어요. 숫자와 결론을 확인해 주세요"** 라고 알린다.
+- 시험이 없는 작업(문서·설정 등)이면 기록 초안은 만들지 않는다.
+
 ## Git
 
 - `main`에 직접 push하지 않는다. 브랜치 이름과 커밋 형식은 [CONTRIBUTING.md](CONTRIBUTING.md)를 따른다.
