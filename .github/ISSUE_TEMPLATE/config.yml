@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 작업 지시서 작성법
+    url: https://github.com/Gansoolgo/Thursday/blob/main/docs/ai-guide.md
+    about: Issue 명세 6칸을 어떻게 채우는지
