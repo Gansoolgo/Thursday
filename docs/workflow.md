@@ -36,15 +36,21 @@ gantt
 
 ## 2. M1 기술 검증 (GO/NO-GO)
 
-수치는 제안이며 첫 측정 후 팀이 확정합니다.
+수치는 제안이며 첫 측정 후 팀이 확정합니다. 각 항목의 상세 명세(입력·출력, 완료 조건)는 Issue에 있습니다.
 
-| 항목 | GO 기준 (안) | 안 되면 |
-|---|---|---|
-| Windows·LeRobot | 2일 안에 Windows에서 SO-101 연결(COM 포트)·캘리브레이션·원격조작 성공 | LeRobot 대신 모터 직접 제어(feetech SDK) + 자체 IK, 또는 WSL·다른 PC 검토 |
-| IK pick/place | 정해진 칸 사이 20회 중 16회 이상 성공, 보정 오차 약 10mm 이하 | 지그 사용, 칸 수 축소 |
-| 로컬 LLM | 목표 20개에 대해 JSON 스키마 유효, 응답 수 초 이내 | 더 작은 모델, 명령 문법 고정 |
-| 물체 인식 | 6종을 OpenVINO로 추론, 작업 조명에서 안정 인식 | 클래스 축소, 조명 고정 |
-| ACT (선택) | 단일 동작 50 에피소드 학습 후 성공률 측정 | 비교 실험으로만 보고 |
+| Issue | 항목 | GO 기준 (안) | 안 되면 | 기한 |
+|---|---|---|---|---|
+| [#3](https://github.com/Gansoolgo/Thursday/issues/3) | Windows·LeRobot | Windows에서 SO-101 연결·캘리브레이션·원격조작 성공 | 모터 SDK 직접 제어 + 자체 IK, WSL, 다른 PC | **11/28** |
+| [#4](https://github.com/Gansoolgo/Thursday/issues/4) | IK pick/place | 20회 중 16회 이상 성공, 놓은 위치 오차 약 10mm 이하 | 지그, 칸 축소, 물건 키우기 | 12/01 |
+| [#5](https://github.com/Gansoolgo/Thursday/issues/5) | 카메라-로봇 보정 | 검증점 평균 오차 10mm 이하 | ArUco 마커, 칸 키우기 | 12/01 |
+| [#6](https://github.com/Gansoolgo/Thursday/issues/6) | 소형 언어 모델 계획 | 한국어 명령 20개 중 18개 의미 정확, 응답 5초 이내 | 작은 모델, few-shot, 문법 고정 | 12/01 |
+| [#7](https://github.com/Gansoolgo/Thursday/issues/7) | 물체 인식 | 클래스별 정확도 90% 이상, 추론 100ms 이내 | 클래스 축소, 조명 고정 | 12/01 |
+| [#29](https://github.com/Gansoolgo/Thursday/issues/29) | 한국어 음성 인식 | 명령 인식 90% 이상, 말 끝 후 1.5초 이내 | 모델 변경, 문구 고정, 텍스트 백업 | 12/01 |
+| [#30](https://github.com/Gansoolgo/Thursday/issues/30) | **동시 실행 부하** | 말 끝 → 계획 완성 평균 5초 이내, 인식 초당 10장 이상 | 모델 축소 → Pi + Hailo-8L로 인식 분리 (D-05) | 12/02 |
+| [#8](https://github.com/Gansoolgo/Thursday/issues/8) | 인터페이스 확정 | 9장 질문 결정, 리뷰 승인 | — | 12/02 |
+| — | ACT (선택) | 단일 동작 50 에피소드 학습 후 성공률 측정 | 비교 실험으로만 보고 | 여유 시 |
+
+결과는 `docs/plan/results-m1.md` 한 곳에 모읍니다.
 
 ## 3. 애자일을 GitHub로 하는 법
 
