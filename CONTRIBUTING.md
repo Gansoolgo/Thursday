@@ -15,7 +15,7 @@
 2. 브랜치 만들기     → main 최신화 후 feature/US-03-hand-over
 3. 작업·커밋         → "US-03: hand_over Skill 추가 (#10)"
 4. push·PR 열기      → PR 본문에 "Closes #10", 체크리스트 채우기
-5. 리뷰 받기         → Reviewers에 1명 지정, 승인 + CI 통과 (리뷰 기준은 5장)
+5. 리뷰·병합 판단   → CI 통과 필수, 리뷰는 권장 (언제 받는지는 5장)
 6. 병합              → Squash and merge, 브랜치 삭제
 7. 내 PC 정리        → main으로 돌아가 pull
 ```
@@ -70,7 +70,9 @@ GitHub에서 **Compare & pull request**를 누르면 PR 템플릿이 뜹니다.
 
 리뷰는 **"이걸 main에 넣어도 팀이 곤란해지지 않는가?"** 를 판단하는 일입니다. 완벽한 코드인지 따지는 자리가 아닙니다.
 
-- **다른 팀원 1명 이상의 승인(Approve)** 이 있어야 병합합니다. (작성자는 자기 PR을 승인할 수 없습니다)
+- **지금 규칙: CI 통과만 필수, 승인은 필수 아님.** 각자 자기 PR을 직접 병합할 수 있습니다.
+- 단, 아래 PR은 **병합 전에 팀원 1명에게 리뷰를 받습니다:** 공통 파일(`app/core/types.py`, `docs/interfaces.md`, `config/*.yaml`)을 바꾸는 PR, 로봇을 움직이거나 Safety Gate·LLM 계획을 바꾸는 PR.
+- 그 외 PR(문서, 자기 모듈 안의 작은 수정)은 리뷰 없이 병합해도 됩니다. 나중에 볼 수 있게 Discord에 PR 링크만 남깁니다.
 - PR 작성자가 오른쪽 **Reviewers**에서 1명을 지정합니다. 그 모듈의 결과를 받아 쓰는 사람이 좋습니다 (예: Vision PR → GenAI 담당).
 - 리뷰어는 **하루 안에** 봅니다. 급하면 Discord에서 부릅니다.
 
@@ -124,11 +126,11 @@ GitHub에서 **Compare & pull request**를 누르면 PR 템플릿이 뜹니다.
 
 ### 5-5. 우회 병합
 
-4명 모두 조직 owner라 보호 규칙을 우회해 병합할 수 있습니다. **우회 병합은 급할 때만** 쓰고, 썼으면 Discord에 이유를 남깁니다.
+4명 모두 조직 owner라 보호 규칙(CI 통과)을 우회해 병합할 수 있습니다. **CI가 실패했는데 우회 병합하는 일은 하지 않습니다.** CI 문제 자체를 고치는 PR처럼 꼭 필요할 때만 쓰고, Discord에 이유를 남깁니다.
 
 ## 6. 병합과 정리
 
-- CI 통과 + 승인 1명 → **Squash and merge** (커밋을 하나로 합쳐 main 기록을 깔끔하게) → **Delete branch**.
+- CI 통과 (+ 필요한 경우 리뷰 승인) → **Squash and merge** (커밋을 하나로 합쳐 main 기록을 깔끔하게) → **Delete branch**.
 - 병합 후 내 PC 정리:
 
 ```powershell
