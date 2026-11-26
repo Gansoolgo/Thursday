@@ -91,6 +91,12 @@ flowchart LR
 | [git-guide.md](docs/git-guide.md) | Git·GitHub 실전: 처음 세팅, 하루 흐름, 실수 복구 |
 | [ai-guide.md](docs/ai-guide.md) | AI에게 일을 정확히 맡겨 수정을 줄이는 법, 복사용 프롬프트 |
 | [workflow.md](docs/workflow.md) | 일정, 애자일(스프린트·DoD·회고), GO/NO-GO |
+| [plan/decisions.md](docs/plan/decisions.md) | **결정 기록**: 무엇을 왜 정했나 |
+| [plan/edge-devices.md](docs/plan/edge-devices.md) | 엣지 AI 장치 20종 조사 (두뇌 장치 선택 근거) |
+| [plan/workspace.md](docs/plan/workspace.md) | 시연 물건 9종 · 작업대 칸 배치 · 작업 설명서 초안 |
+| [plan/materials.md](docs/plan/materials.md) | 준비물 목록 (언제까지, 얼마, 어떻게) |
+| [plan/evaluation.md](docs/plan/evaluation.md) | 평가 계획: 가설 H1~H5, 비교군, 시험 횟수, 기록 형식 |
+| [plan/dependencies.md](docs/plan/dependencies.md) | 의존 관계·핵심 경로, 위험 12개와 대비책, 범위 줄이는 순서, 날짜별 점검 |
 | [AGENTS.md](AGENTS.md) | AI 도구가 지킬 공통 규칙 |
 
 ## 일정
