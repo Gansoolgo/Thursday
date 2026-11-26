@@ -93,6 +93,7 @@ flowchart LR
 | [workflow.md](docs/workflow.md) | 일정, 애자일(스프린트·DoD·회고), GO/NO-GO |
 | [plan/decisions.md](docs/plan/decisions.md) | **결정 기록**: 무엇을 왜 정했나 |
 | [plan/edge-devices.md](docs/plan/edge-devices.md) | 엣지 AI 장치 20종 조사 (두뇌 장치 선택 근거) |
+| [plan/workspace.md](docs/plan/workspace.md) | 시연 물건 9종 · 작업대 칸 배치 · 작업 설명서 초안 |
 | [AGENTS.md](AGENTS.md) | AI 도구가 지킬 공통 규칙 |
 
 ## 일정
