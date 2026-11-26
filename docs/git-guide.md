@@ -6,6 +6,7 @@
 > - 실수해도 대부분 되돌릴 수 있습니다. 당황하지 말고 6장 표를 보고, 모르면 Discord에 묻기.
 >
 > 규칙(무엇을 지켜야 하나)은 [CONTRIBUTING.md](../CONTRIBUTING.md), 이 문서는 **실제로 어떻게 하나**입니다.
+> 📖 낯선 말은 👉 [용어집](glossary.md)
 
 명령은 모두 **Windows PowerShell** 기준입니다. VS Code의 Git 화면이나 GitHub Desktop을 써도 되지만, 막혔을 때 서로 도와주기 쉽도록 명령어 기준으로 적었습니다.
 
