@@ -93,6 +93,7 @@ flowchart LR
 | [ai-guide.md](docs/ai-guide.md) | AI에게 일을 정확히 맡겨 수정을 줄이는 법, 복사용 프롬프트 |
 | [workflow.md](docs/workflow.md) | 일정, 일하는 방식(2~3일씩 반복), 12/02 판정 기준 |
 | [glossary.md](docs/glossary.md) | 📖 **용어집**: 낯선 말을 쉽게 |
+| [records.md](docs/records.md) | 📝 **기록 가이드**: 실험·데이터·결과를 어디에 어떻게 남기나 (양식 포함) |
 | [plan/decisions.md](docs/plan/decisions.md) | **결정 기록**: 무엇을 왜 정했나 |
 | [plan/edge-devices.md](docs/plan/edge-devices.md) | 엣지 AI 장치 20종 조사 (두뇌 장치 선택 근거) |
 | [plan/workspace.md](docs/plan/workspace.md) | 시연 물건 9종 · 작업대 칸 배치 · 작업 설명서 초안 |
