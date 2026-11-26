@@ -11,7 +11,7 @@
 
 | ID | 결정 | 상태 | 날짜 |
 |---|---|---|---|
-| D-01 | 핵심 뼈대는 **능동적 작업 보조** | ✅ | 11/26 |
+| D-01 | 핵심 뼈대는 **능동적 작업 보조**, 확인 모드(기본)·자동 모드 선택 | ✅ | 11/26 |
 | D-02 | 정리 최적화 = **사용 기록 + 공간 효율** 융합 | ✅ | 11/26 |
 | D-03 | 명령 입력은 **처음부터 음성** (텍스트는 백업) | ✅ | 11/26 |
 | D-04 | 조명은 **보류** | ⏸ | 11/26 |
@@ -38,7 +38,15 @@
 | ③ 먼저 알림 | "LED가 보관함에 없어요" / "저항을 안 쓰고 넘어간 것 같아요" | 필요한 물건이 안 보이거나, 단계가 건너뛰어짐 |
 | ④ 스스로 복구 | 놓기 실패 → 다시 확인 → 재시도, 안 되면 사람에게 알림 | 행동 후 결과 확인 (interfaces.md 실패 코드) |
 
-- **안전 원칙:** 능동 행동은 **제안 → 사용자 확인("응") → 실행**을 기본으로 한다. 사람 손 근처에서 로봇이 예고 없이 움직이지 않게 하기 위함. 데모에서 "확인 없이 바로 실행" 모드를 보여 줄지는 데모 대본에서 정한다.
+- **능동 모드 (11/26 확정: 모드 선택):**
+
+  | 모드 | 동작 | 기본값 |
+  |---|---|---|
+  | **확인 모드** | 제안 → 사용자 "응" → 실행 | ✅ 기본 |
+  | **자동 모드** | 알리고 바로 실행 ("저항 꺼내 둘게요") | 사용자가 말이나 버튼으로 켬 |
+
+  - 두 모드 모두 **Safety Gate는 똑같이 통과**해야 한다. 모드는 "사람에게 묻는가"만 바꾼다.
+  - 자동 모드에서도 **보관 칸 → 작업 구역** 이동만 허용하고, 전달 칸(H) 근처처럼 사람 손이 올 수 있는 곳은 확인을 받는다 (안전).
 
 **이유:** 시키는 것만 하는 팔은 흔하다(선행 사례 다수). "작업 상태를 보고 먼저 돕는 것"이 GenAI가 꼭 필요한 이유이자 차별점이다.
 
@@ -74,26 +82,41 @@
 
 ## D-05. 두뇌(AI 실행) 장치 🟡 검토 중
 
-**질문:** AI(인식·음성·LLM)를 어디서 돌릴까? 강사님과의 논의: Raspberry Pi 성능이 부족하면 가속 모듈을 붙이거나, 노트북도 Edge AI이므로 상관없음.
+**질문:** AI(음성 인식·물체 인식·LLM)를 어디서 돌릴까? 강사님 의견: Raspberry Pi 성능이 부족하면 가속 모듈을 붙이거나, 노트북도 Edge AI이므로 상관없음.
 
-| 선택지 | 장점 | 단점 |
-|---|---|---|
-| **A. Intel 노트북 (Core Ultra 5 225H)** | 이미 있음. CPU·iGPU·NPU로 인식·음성·LLM 동시. 배운 스택(OpenVINO, Geti) 그대로 | 크기가 큼 (로봇에 "붙어 있는" 느낌은 약함) |
-| **B. Raspberry Pi 5 + AI HAT+ (Hailo-8/8L)** | 작고 로봇 옆에 붙이기 좋음. 비전 가속 | **LLM 못 돌림.** Hailo는 OpenVINO가 아닌 자체 도구(HEF) 필요 → Geti 모델을 다시 변환해야 하고, 변환은 x86 Linux/WSL2에서만 |
-| **C. Raspberry Pi 5 + AI HAT+ 2 (Hailo-10H, 40 TOPS INT4, RAM 8GB)** | 소형 LLM·VLM을 Pi에서 돌릴 수 있다고 소개됨 | 독립 리뷰에서 **LLM은 Pi CPU가 오히려 더 빨랐다**는 결과. 지원 모델이 Hailo 쪽 목록으로 제한. 위의 변환 도구 문제 동일. 구매 필요 |
-| **D. Raspberry Pi 5 CPU + OpenVINO** | OpenVINO가 ARM64 CPU를 지원해 같은 스택 사용 가능 | 가속기가 없어 인식은 느리고, 음성+LLM+인식 동시 실행은 어려움 |
-| **E. 혼합: Pi(+HAT)가 카메라·인식, 노트북이 음성·LLM·계획** | "현장 장치 + 엣지 서버" 계층 구조로 설명 가능 | 장치 2개 사이 통신이 추가됨 → 지연·고장 지점·디버깅 증가. 3주 일정에 부담 |
+**우리가 돌려야 하는 것:** ① 음성 인식(상시) ② 물체 인식(상시) ③ 로컬 LLM 3~4B급(명령마다) ④ 로봇 제어. **③ LLM이 가장 무겁고 장치 선택을 좌우합니다.**
 
-**현재 추천:** **A (노트북 하나)를 기본으로 확정**하고, 강사님이 소형 장치를 원하시면 **E를 M4 확장**으로 둔다.
-- 이유 1: 핵심인 음성 + LLM이 Pi 계열에서는 현실적으로 느리거나 제한적.
-- 이유 2: Hailo는 Intel 스택(OpenVINO·Geti)과 도구가 달라 배운 것을 그대로 못 쓰고 변환 작업이 추가됨.
-- 이유 3: 노트북도 인터넷 없이 현장에서 처리하므로 Edge AI.
+### 비교표
+
+| 장치 | AI 성능 (제조사 발표) | 물체 인식 | 로컬 LLM | 도구 (Intel 스택과 호환) | 가격 (발표·소매) | 우리 적합도 |
+|---|---|---|---|---|---|---|
+| **① 현재 노트북** Core Ultra 5 225H | CPU + iGPU + NPU | ✅ NPU·iGPU | ✅ iGPU (속도는 M1 실측) | ✅ OpenVINO·Geti 그대로 | **보유 (0원)** | ⭐⭐⭐ 기본 |
+| **② Intel 미니 PC** Core Ultra Series 3 (Panther Lake) | 최신 NPU + Arc iGPU | ✅ | ✅ 노트북보다 강함 | ✅ 그대로. **Intel Physical AI 런타임의 공식 대상 CPU** | 약 $760~$2,000 | ⭐⭐ 작게 만들고 싶을 때 |
+| **③ Raspberry Pi 5 (CPU만)** | 가속기 없음 | 🔶 느림 | ❌ 아주 작은 모델만 | ✅ OpenVINO가 ARM64 CPU 지원 | 보유 | ⭐ 보조 장치로만 |
+| **④ Pi 5 + AI HAT+** Hailo-8L / Hailo-8 | 13 / 26 TOPS (INT8) | ✅ 빠름 | ❌ 비전 전용 | ❌ Hailo 전용 형식(HEF)으로 변환 필요, 변환은 x86 Linux·WSL2에서만 | $70 / $110 | ⭐ 인식만 떼어 낼 때 |
+| **⑤ Pi 5 + AI HAT+ 2** Hailo-10H, RAM 8GB | 40 TOPS (INT4) | ✅ (HAT+ 26 TOPS와 비슷하다고 발표) | 🔶 소형 LLM 가능하나 **리뷰에서 Pi CPU가 더 빨랐음** | ❌ ④와 같음, 지원 모델이 Hailo 목록으로 제한 | 약 $130 | ⭐ |
+| **⑥ NVIDIA Jetson Orin Nano Super** RAM 8GB | 67 TOPS | ✅ | ✅ 소형 LLM 가능 | ❌ CUDA·TensorRT (NVIDIA 스택). OpenVINO·Geti 경험을 못 씀 | $249 (재고 부족 보고) | ⭐ 성능은 좋으나 스택이 다름 |
+| **⑦ Rockchip RK3588 보드** (Orange Pi 5 등) | NPU 6 TOPS | ✅ 빠름 | 🔶 RKLLM, 8비트만, NPU 이점 불분명 | ❌ RKNN 전용 도구 | 약 $100~ | ❌ |
+| **⑧ Intel Neural Compute Stick 2** | — | — | — | ❌ **단종, OpenVINO 2025.1부터 미지원** | — | ❌ 쓰지 말 것 |
+
+> 성능·가격은 제조사 발표와 리뷰 기준이며 우리 장비에서 측정한 값이 아닙니다. TOPS는 정밀도(INT8/INT4)와 측정 방식이 달라 장치끼리 직접 비교하기 어렵습니다.
+
+### 구성 방식
+
+| 구성 | 설명 | 장점 | 단점 |
+|---|---|---|---|
+| **A. 노트북 하나** | ①에서 전부 | 가장 단순, 추가 비용 0, 배운 스택 그대로 | 장치가 큼 |
+| **B. Intel 미니 PC 하나** | ②에서 전부 | 작고 같은 스택, Intel 공식 로봇 두뇌 방향과 일치 | 구매 비용·배송 시간 |
+| **C. 계층형** | Pi(+HAT)가 카메라·인식·조명 같은 "현장 손발", 노트북이 음성·LLM·계획 | "현장 장치 + 엣지 서버" 구조로 설명하기 좋음 | 장치 간 통신·변환 작업 추가, 3주 일정에 부담 |
+
+**현재 추천:** **A로 시작**해서 M1~M3를 진행하고, 강사님이 소형·계층 구조를 원하시면 **C를 M4 확장**으로 둔다. 예산이 있으면 B로 옮기는 건 코드 수정 없이 가능(같은 Intel 스택).
 
 **출처**
-- [Raspberry Pi AI HAT+ 2 발표](https://www.raspberrypi.com/news/introducing-the-raspberry-pi-ai-hat-plus-2-generative-ai-on-raspberry-pi-5/) · [Jeff Geerling 리뷰](https://jeffgeerling.com/blog/2026/raspberry-pi-ai-hat-2) · [CNX Software](https://www.cnx-software.com/2026/01/15/raspberry-pi-ai-hat-2-targets-generative-ai-llm-vlm-with-hailo-10h-accelerator/)
-- [Ultralytics Hailo 내보내기 (컴파일은 Linux x86_64)](https://docs.ultralytics.com/integrations/hailo) · [Hailo 커뮤니티: 공식 지원은 x86 Ubuntu·WSL2](https://community.hailo.ai/t/converting-yolov8n-onnx-to-hef-on-windows/17835)
-- [Raspberry Pi에서 OpenVINO로 YOLO 실행](https://www.raspberrypi.com/news/run-ultralytics-yolo-on-raspberry-pi-with-openvino/)
-- 위 수치는 제조사 발표·리뷰 기준이며 우리 장비로 측정한 값이 아님.
+- Raspberry Pi: [AI HAT+](https://www.raspberrypi.com/products/ai-hat/) · [AI HAT+ 2 발표](https://www.raspberrypi.com/news/introducing-the-raspberry-pi-ai-hat-plus-2-generative-ai-on-raspberry-pi-5/) · [Jeff Geerling AI HAT+ 2 리뷰](https://jeffgeerling.com/blog/2026/raspberry-pi-ai-hat-2) · [CNX Software](https://www.cnx-software.com/2026/01/15/raspberry-pi-ai-hat-2-targets-generative-ai-llm-vlm-with-hailo-10h-accelerator/) · [Pi에서 OpenVINO로 YOLO 실행](https://www.raspberrypi.com/news/run-ultralytics-yolo-on-raspberry-pi-with-openvino/)
+- Hailo 변환 도구: [Ultralytics Hailo 가이드](https://docs.ultralytics.com/integrations/hailo) · [Hailo 커뮤니티 (x86 Ubuntu·WSL2 공식 지원)](https://community.hailo.ai/t/converting-yolov8n-onnx-to-hef-on-windows/17835)
+- NVIDIA: [Jetson Orin Nano Super](https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-orin/nano-super-developer-kit) · [Tom's Hardware](https://www.tomshardware.com/tech-industry/artificial-intelligence/nvidia-launches-new-usd249-ai-development-board-that-does-67-tops)
+- Rockchip: [RKLLM 소개 (CNX Software)](https://www.cnx-software.com/2024/07/15/rockchip-rkllm-toolkit-npu-accelerated-large-language-models-rk3588-rk3588s-rk3576/)
+- Intel: [NCS2 OpenVINO 지원 안내](https://www.intel.com/content/www/us/en/support/articles/000057224/boards-and-kits.html) · Panther Lake 미니 PC 가격 [Notebookcheck](https://www.notebookcheck.net/Minisforum-releases-new-Panther-Lake-powered-mini-PC-with-launch-discounts.1353400.0.html) · [Wccftech (ASUS NUC 16 Pro)](https://wccftech.com/asus-debuts-nuc-16-pro-with-intel-core-ultra-x7-358h-at-1600/amp/)
 
 ## D-06 ~ D-11
 
