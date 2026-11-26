@@ -20,6 +20,7 @@
 5. PR 열기           본문에 "Closes #10", 체크리스트 채우기
 6. 병합              CI 통과 (+ 필요하면 리뷰) → Squash and merge → 브랜치 삭제
 7. Discord에 한 줄   "#10 병합했어요: hand_over 완성"
+8. 기록              시험했으면 실험 기록, 데이터 모았으면 데이터 카드  (docs/records.md)
 ```
 
 ## 1. Issue
