@@ -4,7 +4,7 @@
 
 > 작업하는 사람 옆에서 **준비 → 보조 → 정리**를 돕는, 인터넷 없이 Intel AI PC 한 대로 동작하는 피지컬 AI 조수
 
-Intel AI 해커톤 최종 프로젝트 | 기간 2026-11-26 ~ 2026-12-18 (구현 마감 12-17)
+최종 프로젝트 | 기간 2026-11-26 ~ 2026-12-18 (구현 마감 12-17)
 
 ---
 
@@ -62,6 +62,7 @@ flowchart LR
 | [docs/vision.md](docs/vision.md) | 문제 정의, 대상 사용자, 성공 기준, 하지 않을 것 |
 | [docs/usecases.md](docs/usecases.md) | 유즈케이스 다이어그램, 시나리오, 유저 스토리 |
 | [docs/architecture.md](docs/architecture.md) | 시스템 아키텍처, 배치(장치) 구성, 클래스·시퀀스·상태 다이어그램 |
+| [docs/interfaces.md](docs/interfaces.md) | 모듈 간 데이터 형식·함수 규격 (World State, Plan JSON, Skill, 실패 코드) — 초안 |
 | [docs/workflow.md](docs/workflow.md) | 일정·Milestone, 스프린트 방식, 브랜치 규칙, 완료 기준(DoD) |
 
 ## 팀과 역할
