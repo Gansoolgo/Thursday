@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+
+# 비밀 파일 (키는 OS 비밀 저장소에 둔다)
+.env
+.env.*
+!.env.example
+
+# 모델·데이터 (용량이 커서 저장소 밖에 둔다)
+models/**/*.bin
+models/**/*.xml
+*.onnx
+*.pt
+*.pth
+*.safetensors
+data/raw/
+outputs/
+logs/
+
+# IDE·OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
