@@ -141,15 +141,17 @@ VS Code는 충돌 부분에 **Accept Current / Accept Incoming / Accept Both** �
 | **Suggestion** | 줄 코멘트에서 ± 아이콘 | 고칠 코드를 직접 제안 → 작성자가 클릭 한 번으로 반영 |
 | **필터** | Issues 검색창 | `is:open assignee:@me` 내 할 일 · `milestone:"M1 기술 검증"` · `label:spike` |
 | **Milestone 진행률** | [Milestones](https://github.com/Gansoolgo/Thursday/milestones) | 이번 단계가 몇 % 끝났나 |
-| **Projects 보드** | 조직 Projects | 칸반: Todo / In Progress / Review / Done (아래 5장) |
+| **Projects 보드** | [스프린트 보드](https://github.com/orgs/Gansoolgo/projects/1) | 칸반: Backlog / Todo / In Progress / Review / Done (아래 5장) |
 | **Actions** | 저장소 Actions 탭 | CI 결과·로그. 빨간색이면 눌러서 어느 줄이 실패했는지 확인 |
 
 ## 5. 칸반 보드 (GitHub Projects)
 
 애자일 스프린트 보드입니다. 누가 무엇을 하는지 한눈에 보입니다.
+👉 **[Thursday 스프린트 보드](https://github.com/orgs/Gansoolgo/projects/1)** (조직 멤버만 보임)
 
 | 칸 | 의미 | 언제 옮기나 |
 |---|---|---|
+| 🗂 Backlog | 이후 스프린트에 할 것 | 스프린트 계획 때 Todo로 |
 | 📋 Todo | 이번 스프린트에 할 것 | 스프린트 계획 회의 |
 | 🔨 In Progress | 작업 중 | 브랜치 만들 때 |
 | 👀 Review | PR 열림 | PR 열 때 (자동 가능) |

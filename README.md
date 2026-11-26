@@ -103,7 +103,7 @@ flowchart LR
 | M4 완성·측정 | 12/15 ~ 12/17 | 교육 시나리오, 반복 시험, **구현 마감** |
 | M5 발표 | 12/18 | 라이브 데모 |
 
-진행 상황: [Milestones](https://github.com/Gansoolgo/Thursday/milestones) · [Issues](https://github.com/Gansoolgo/Thursday/issues)
+진행 상황: [스프린트 보드](https://github.com/orgs/Gansoolgo/projects/1) · [Milestones](https://github.com/Gansoolgo/Thursday/milestones) · [Issues](https://github.com/Gansoolgo/Thursday/issues)
 
 ## 팀
 
