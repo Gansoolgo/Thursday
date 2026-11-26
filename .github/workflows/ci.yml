@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  lint-test:
+    name: Ruff + pytest (Windows)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 개발 도구 설치
+        run: python -m pip install -r requirements-dev.txt
+
+      - name: Ruff 린트
+        run: python -m ruff check .
+
+      - name: pytest (하드웨어는 mock)
+        shell: pwsh
+        run: |
+          python -m pytest -q
+          # 5 = 아직 테스트가 하나도 없음. 코드가 생기기 전까지는 통과로 본다.
+          if ($LASTEXITCODE -eq 5) { exit 0 }
+          exit $LASTEXITCODE
