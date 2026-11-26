@@ -64,7 +64,9 @@ flowchart LR
 | [docs/usecases.md](docs/usecases.md) | 유즈케이스 다이어그램, 시나리오, 유저 스토리 |
 | [docs/architecture.md](docs/architecture.md) | 시스템 아키텍처, 배치(장치) 구성, 클래스·시퀀스·상태 다이어그램 |
 | [docs/interfaces.md](docs/interfaces.md) | 모듈 간 데이터 형식·함수 규격 (World State, Plan JSON, Skill, 실패 코드) — 초안 |
-| [docs/workflow.md](docs/workflow.md) | 일정·Milestone, 스프린트 방식, 브랜치 규칙, 완료 기준(DoD) |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | **팀 협업 방법**: Issue → 브랜치 → PR → 리뷰 → 병합 |
+| [AGENTS.md](AGENTS.md) | AI 도구(Claude Code, Codex 등) 공통 규칙 |
+| [docs/workflow.md](docs/workflow.md) | 일정·Milestone, **애자일 방식(스프린트·백로그·DoD·회고)과 GitHub 연결**, GO/NO-GO |
 
 ## 팀과 역할
 
