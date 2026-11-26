@@ -1,5 +1,7 @@
 # Thursday — 작업실 AI 조수 로봇팔
 
+**T**ask-aware **H**elper that **U**nderstands, **R**earranges & **S**ets up **D**esks **A**daptively for **Y**ou
+
 > 작업하는 사람 옆에서 **준비 → 보조 → 정리**를 돕는, 인터넷 없이 Intel AI PC 한 대로 동작하는 피지컬 AI 조수
 
 Intel AI 해커톤 최종 프로젝트 | 기간 2026-11-26 ~ 2026-12-18 (구현 마감 12-17)

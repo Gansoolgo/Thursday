@@ -266,7 +266,7 @@ sequenceDiagram
     actor User as 작업자
     participant App as Action Manager
     participant Vision
-    participant Opt as Layout Optimizer
+    participant LO as Layout Optimizer
     participant Log as 사용 기록
     participant Gate as Safety Gate
     participant Arm as SO-101
@@ -276,8 +276,8 @@ sequenceDiagram
     Vision-->>App: WorldState
     App->>Log: 사용 빈도 · 함께 쓴 물건 · 다음 작업
     Log-->>App: 사용 통계
-    App->>Opt: assign(물건, 빈 칸, 통계)
-    Opt-->>App: 칸 배정표 + 예상 거리
+    App->>LO: assign(물건, 빈 칸, 통계)
+    LO-->>App: 칸 배정표 + 예상 거리
     loop 물건마다
         App->>Gate: pick_place 검증
         Gate-->>App: OK
