@@ -56,4 +56,4 @@
 1. SO-101 + IK로 정해진 칸 사이 pick/place가 안정적으로 되는가 (좌표 보정 오차 포함).
 2. 노트북 iGPU에서 로컬 LLM이 쓸 만한 속도로 올바른 JSON 계획을 내는가.
 3. 웹캠으로 작은 물건 6종 정도를 안정적으로 구분하는가.
-4. 로봇 제어용 OS(Windows/Ubuntu)에서 LeRobot·OpenVINO가 문제없이 동작하는가.
+4. Windows 11 노트북에서 LeRobot(SO-101 연결·IK)과 OpenVINO가 함께 문제없이 동작하는가. (LeRobot·Intel physicalai 공식 예제는 Linux 중심이라 Windows 지원 수준이 문서로 확인되지 않음)
