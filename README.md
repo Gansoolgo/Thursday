@@ -66,14 +66,14 @@ flowchart LR
 
 ## 팀과 역할
 
-| 이름 | 역할 | 주요 담당 |
-|---|---|---|
-| 신재석 | System Architect (안) | 요구사항, World State·Skill 규격, 통합, 일정 |
-| 구경윤 | (팀 회의에서 확정) | |
-| 박휘성 | (팀 회의에서 확정) | |
-| 김효신 | (팀 회의에서 확정) | |
+팀원: 신재석, 구경윤, 박휘성, 김효신 — **역할은 추후 결정** ([#1](https://github.com/Gansoolgo/Thursday/issues/1))
 
-남은 역할: **Vision Engineer**(Geti 학습, 추론, 카메라-로봇 좌표 보정, 결과 확인) / **GenAI Engineer**(로컬 LLM, 프롬프트, JSON 계획, 검증·예외 처리) / **Robotics Engineer**(SO-101, IK pick/place, 안전 정지, 최적 배치)
+| 역할 | 주요 담당 | 담당자 |
+|---|---|---|
+| System Architect | 요구사항, World State·Skill 규격, 통합, 일정 | 추후 결정 |
+| Vision Engineer | Geti 학습, 추론, 카메라-로봇 좌표 보정, 결과 확인 | 추후 결정 |
+| GenAI Engineer | 로컬 LLM, 프롬프트, JSON 계획, 검증·예외 처리 | 추후 결정 |
+| Robotics Engineer | SO-101, IK pick/place, 안전 정지, 최적 배치 | 추후 결정 |
 
 ## 일정
 
