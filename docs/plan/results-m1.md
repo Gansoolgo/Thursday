@@ -45,12 +45,9 @@
 ### #7 물체 인식 — 물건별
 | 물건 | 정확도 | 헷갈린 물건 |
 |---|---|---|
-| breadboard | | |
-| led_case | | |
-| resistor_case | | |
-| jumper_case | | |
-| battery_holder | | |
-| block_red / blue / yellow | | |
+| block 6색 (파랑·노랑·주황·빨강·초록·흰색) | | |
+| block_tray | | |
+| handkerchief 상태 (펴짐 / 모서리 접힘·위치) | | |
 | screwdriver | | |
 | 장치별 속도 (NPU / GPU / CPU, ms) | | |
 

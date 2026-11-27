@@ -33,7 +33,7 @@
 | 좌표계 | **작업대 좌표계 `table`**: 원점 = 로봇 베이스 중심 바로 아래 작업대 표면, x = 로봇 정면 방향, y = 로봇 기준 왼쪽, z = 위. 오른손 좌표계 |
 | 픽셀 좌표 | 카메라 이미지 기준 (u, v), 왼쪽 위가 (0, 0). 모듈 밖으로는 내보내지 않고 Vision 안에서 `table`로 변환 |
 | 시간 | `time.time()` 실수 초 (Unix time). 화면 표시만 사람이 읽는 형식 |
-| ID | 소문자 + 숫자 + `_` (예: `resistor_220`, `S3`, `W1`, `H`) |
+| ID | 소문자 + 숫자 + `_` (예: `block_blue`, `S3`, `A1`, `H`) |
 | 데이터 교환 | Python `dataclass` ↔ JSON 상호 변환 가능해야 함 (`to_dict()` / `from_dict()`) |
 | 로그 | 한 줄에 JSON 하나(`.jsonl`), `logs/` 폴더 (Git 제외) |
 
@@ -44,8 +44,8 @@
 ```python
 @dataclass
 class ObjectInfo:
-    id: str               # 인스턴스 ID, 예: "resistor_220_0"
-    cls: str              # 물건 종류 = objects.yaml의 키, 예: "resistor_220"
+    id: str               # 인스턴스 ID, 예: "block_blue_0"
+    cls: str              # 물건 종류 = objects.yaml의 키, 예: "block_blue"
     confidence: float     # 0.0~1.0 인식 신뢰도
     pose_mm: tuple[float, float, float]  # table 좌표 (x, y, z) 물건 중심
     yaw_deg: float | None # 놓인 방향, 모르면 None
@@ -54,7 +54,7 @@ class ObjectInfo:
 @dataclass
 class Slot:
     id: str               # "S1".."S9" 보관, "W1".."W4" 작업, "H" 전달
-    zone: str             # "storage" | "work" | "handover"
+    zone: str             # "storage" | "work" | "assembly" | "handover"
     center_mm: tuple[float, float, float]
     occupied_by: str | None   # ObjectInfo.id 또는 None
 
@@ -92,11 +92,11 @@ class WorldState:
   "scene_id": "frame_000123",
   "timestamp": 1764147600.12,
   "objects": [
-    {"id": "resistor_220_0", "cls": "resistor_220", "confidence": 0.93,
-     "pose_mm": [180.0, 60.0, 5.0], "yaw_deg": null, "slot_id": "S2"}
+    {"id": "block_blue_0", "cls": "block_blue", "confidence": 0.93,
+     "pose_mm": [180.0, 60.0, 20.0], "yaw_deg": null, "slot_id": "A1"}
   ],
   "slots": {
-    "S2": {"id": "S2", "zone": "storage", "center_mm": [180.0, 60.0, 0.0], "occupied_by": "resistor_220_0"},
+    "A1": {"id": "A1", "zone": "assembly", "center_mm": [180.0, 60.0, 0.0], "occupied_by": "block_blue_0"},
     "H":  {"id": "H", "zone": "handover", "center_mm": [220.0, -120.0, 0.0], "occupied_by": null}
   },
   "robot": {"state": "IDLE", "calibrated": true, "holding": null},
@@ -113,15 +113,15 @@ class WorldState:
 ### `config/objects.yaml` — 다룰 수 있는 물건
 
 ```yaml
-resistor_220:
-  display_name: 저항 220Ω
-  aliases: [저항, 220옴, 빨간 저항]   # LLM이 사용자 말과 연결할 때 사용
-  size_mm: [30, 20, 15]
+block_blue:
+  display_name: 파랑 블록
+  aliases: [파랑, 파란 블록, 파란색]   # LLM이 사용자 말과 연결할 때 사용
+  size_mm: [40, 40, 40]
   graspable: true
-led_red:
-  display_name: 빨간 LED
-  aliases: [LED, 엘이디, 빨간 불]
-  size_mm: [25, 25, 20]
+block_tray:
+  display_name: 블록 트레이
+  aliases: [트레이, 블록 상자, 부품 박스]
+  size_mm: [90, 60, 25]
   graspable: true
 ```
 
@@ -129,19 +129,22 @@ led_red:
 
 ```yaml
 S1: {zone: storage, center_mm: [150, 100, 0]}
-W1: {zone: work, center_mm: [250, 0, 0]}
+T:  {zone: work, center_mm: [250, 60, 0]}       # 트레이 자리
+A1: {zone: assembly, center_mm: [180, 60, 0]}   # 조립 줄 (사용자 쪽)
 H:  {zone: handover, center_mm: [220, -120, 0]}
 ```
 
 ### `tasks/<task_id>.yaml` — 작업 설명서
 
 ```yaml
-task_id: led_lab
-name: LED 회로 실습
-domain: electronics          # electronics | education | assembly ...
-required_objects: [breadboard, led_red, resistor_220, jumper_wires, battery_holder]
-layout_hint: 저항은 LED 바로 옆 칸에 둔다   # 자연어, LLM이 참고만 함
+task_id: block_a
+name: 블록 작업 A안
+domain: assembly             # assembly | household ...
+required_objects: [block_tray, block_blue, block_yellow, block_orange, block_red, block_green, block_white]
+layout_hint: 사용자 쪽 칸(A1)부터 먼 쪽으로 순서대로 놓는다   # 자연어, LLM이 참고만 함
 ```
+
+> 블록 작업에 필요한 `steps`의 `target_slot`, `setup`, 선후관계(`after`)는 아직 이 형식에 없습니다. 초안은 [workspace.md](plan/workspace.md) 4장, 반영은 #8에서 합니다.
 
 **규칙:** `required_objects`의 모든 값은 `objects.yaml`에 있어야 합니다. 시작할 때 검사해서 없으면 실행하지 않습니다.
 
@@ -184,13 +187,13 @@ LLM은 아래 JSON **만** 출력합니다. OpenVINO GenAI의 JSON schema 제약
 | `ask` | 모호해서 사용자에게 물어봄 | `question` (steps는 빈 배열) |
 | `reject` | 할 수 없거나 위험함 | `reason` (steps는 빈 배열) |
 
-**예시: "저항 줘" (후보가 하나일 때)**
+**예시: "파랑 블록 줘" (후보가 하나일 때)**
 
 ```json
-{"decision": "execute", "goal": "저항 전달", "task_id": null,
+{"decision": "execute", "goal": "파랑 블록 전달", "task_id": null,
  "steps": [
-   {"skill": "hand_over", "object_id": "resistor_220_0", "slot_id": null},
-   {"skill": "verify_result", "object_id": "resistor_220_0", "slot_id": "H"}
+   {"skill": "hand_over", "object_id": "block_blue_0", "slot_id": null},
+   {"skill": "verify_result", "object_id": "block_blue_0", "slot_id": "H"}
  ],
  "question": null, "reason": null}
 ```
@@ -271,8 +274,8 @@ class RobotArm(Protocol):
 ### 사용 기록 `logs/usage.jsonl` (한 줄 = 한 사건)
 
 ```json
-{"t": 1764147600.1, "event": "handed_over", "cls": "resistor_220", "task_id": "led_lab", "session": "s_001"}
-{"t": 1764147650.4, "event": "task_started", "cls": null, "task_id": "led_lab", "session": "s_001"}
+{"t": 1764147600.1, "event": "task_started", "cls": null, "task_id": "block_a", "session": "s_001"}
+{"t": 1764147650.4, "event": "handed_over", "cls": "block_blue", "task_id": "block_a", "session": "s_001"}
 ```
 
 | event | 언제 |
