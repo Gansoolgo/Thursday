@@ -6,6 +6,9 @@
 # 설치: python -m pip install -r requirements.txt
 
 # ── 공통 (System: 신재석) ─────────────────────────
+# Thursday 한방 대시보드 (app/ui/hanbang.py, #46) — Windows 11 · Python 3.12 에서 설치·실행 확인
+streamlit==1.67.0
+PyYAML==6.0.4
 
 # ── Robotics (구경윤·신재석) — #3 결과로 lerobot 버전 고정 ──
 
