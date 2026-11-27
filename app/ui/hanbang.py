@@ -387,7 +387,7 @@ def map_chart(
             }
         )
     df = pd.DataFrame(rows)
-    xs = alt.Scale(domain=[-width / 2 - 20, width / 2 + 20])  # 오른쪽 = +y
+    xs = alt.Scale(domain=[-20, width + 20])  # 오른쪽 = +y (원점 = 왼쪽 뒤 모서리)
     ys = alt.Scale(domain=[-50, depth + 60], reverse=True)  # 위 = 뒤쪽(로봇), 아래 = 사람
     color = alt.Color(
         "zone:N",
@@ -397,10 +397,10 @@ def map_chart(
         title="종류",
     )
     table = (
-        alt.Chart(pd.DataFrame([{"x1": 0, "x2": depth, "y1": -width / 2, "y2": width / 2}]))
+        alt.Chart(pd.DataFrame([{"x1": 0, "x2": depth, "y1": 0, "y2": width}]))
         .mark_rect(fillOpacity=0.04, stroke="#87919a", strokeWidth=2)
         .encode(
-            x=alt.X("y1:Q", scale=xs, title="y (mm) · 사람이 볼 때 오른쪽 +"),
+            x=alt.X("y1:Q", scale=xs, title="y (mm) · 사람이 볼 때 오른쪽 →"),
             x2="y2:Q",
             y=alt.Y("x1:Q", scale=ys, title="x (mm) · 뒤(로봇) → 앞(사람)"),
             y2="x2:Q",
@@ -444,7 +444,7 @@ def map_chart(
     )
     marks = pd.DataFrame(
         [{"x": rx, "y": ry, "t": f"로봇 {n}"} for n, (rx, ry) in robots.items()]
-        + [{"x": depth + 35, "y": 0.0, "t": "사람"}]
+        + [{"x": depth + 35, "y": width / 2, "t": "사람"}]
     )
     people = (
         alt.Chart(marks)
@@ -468,6 +468,10 @@ def map_page() -> None:
         "아래 = 사람. 칸을 고르고 이름 · 종류 · 좌표를 바꿉니다. **ID 는 고정**, 표시 이름만 "
         "자유롭게 바꿔요 — 프로그램과 기록이 ID 로 칸을 찾기 때문입니다. "
         "초록 점선 = 팔마다 닿는 범위, 빨간 굵은 테두리 = 범위 밖이거나 작업대 밖."
+    )
+    st.caption(
+        "좌표 원점 = 커팅 매트 모서리 ArUco 마커 (D-16). 정확한 모서리 · 축은 #5 에서 정하므로 "
+        "지금은 임시로 왼쪽 뒤 모서리(로봇 A 쪽), x = 사람 쪽, y = 사람이 볼 때 오른쪽."
     )
     errs = sl.validate(ss.slots)
     far = [s.id for s in ss.slots if not sl.in_reach(s, ss.reach, ss.robots)]
@@ -526,7 +530,7 @@ def map_page() -> None:
             )
             c1, c2, c3 = st.columns(3)
             x = c1.number_input("x 앞 (mm)", value=s.center_mm[0], step=5.0)
-            y = c2.number_input("y 오른쪽+ (mm)", value=s.center_mm[1], step=5.0)
+            y = c2.number_input("y 오른쪽 (mm)", value=s.center_mm[1], step=5.0)
             z = c3.number_input("z 위 (mm)", value=s.center_mm[2], step=1.0)
             c4, c5 = st.columns(2)
             dx = c4.number_input("앞뒤 크기 (mm)", value=s.size_mm[0], step=5.0)

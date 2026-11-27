@@ -4,9 +4,10 @@
 
 작업대 (사용자 지정, 2026-11-27)
 - 가로(좌우) 60 cm × 세로(앞뒤) 45 cm. 사람은 앞쪽, 로봇팔 A · B 는 건너편(뒤쪽) 모서리 쪽.
-- 원점 = 뒤쪽 가장자리 가운데 (두 로봇 사이), x = 사람 쪽(앞), y = 로봇이 보는 방향 기준 왼쪽
-  (= 사람이 볼 때 오른쪽), z = 위.  ※ interfaces.md 0장은 로봇 1대 기준이라
-  양팔일 때 원점을 어디로 할지는 interfaces 9장 질문으로 올림 — 그때까지 이 가정을 씀.
+- 원점 = 커팅 매트 모서리의 ArUco 마커 (D-16, interfaces.md 0장). 어느 모서리 · 어느 축인지는
+  #5 보정 때 정하므로, 그때까지 임시로: 원점 = 뒤쪽(로봇 쪽) 모서리 중 사람이 볼 때 왼쪽(로봇 A 쪽),
+  x = 사람 쪽(앞, 0~450), y = 사람이 볼 때 오른쪽(0~600), z = 위. 오른손 좌표계.
+  #5 에서 정해지면 이 값만 바꾸면 됨.
 - 로봇 받침 위치(ROBOTS)와 닿는 범위는 실측 전 예시 숫자. 화면에서 바꿀 수 있다.
 
 약속
@@ -38,7 +39,7 @@ _ID_RE = re.compile(r"^[A-Za-z][A-Za-z0-9_]{0,15}$")
 DEFAULT_PATH = Path("logs/hanbang/slots.yaml")
 TABLE_MM = (450.0, 600.0)  # (앞뒤 x, 좌우 y) — 세로 45 cm · 가로 60 cm
 # 로봇 받침 중심 (x, y) mm. A = 사람이 볼 때 왼쪽 뒤, B = 오른쪽 뒤 (배치도 기준, 실측 전)
-ROBOTS: dict[str, tuple[float, float]] = {"A": (0.0, -150.0), "B": (0.0, 150.0)}
+ROBOTS: dict[str, tuple[float, float]] = {"A": (0.0, 150.0), "B": (0.0, 450.0)}
 
 
 @dataclass(frozen=True)
@@ -83,19 +84,19 @@ def default_slots() -> list[Slot]:
     }
     n = 1
     for x in (100.0, 145.0, 190.0):  # 보관·정리대: 뒤 → 앞
-        for y in (275.0, 235.0, 195.0):  # 사람이 볼 때 오른쪽 끝부터
+        for y in (575.0, 535.0, 495.0):  # 사람이 볼 때 오른쪽 끝부터
             sid = f"S{n}"
             name, home = names.get(sid, ("", None))
             out.append(Slot(sid, name, "storage", (x, y, 0.0), (40.0, 40.0), home))
             n += 1
-    out.append(Slot("T", "트레이 자리", "work", (150.0, 40.0, 0.0), (70.0, 90.0), "block_tray"))
+    out.append(Slot("T", "트레이 자리", "work", (150.0, 340.0, 0.0), (70.0, 90.0), "block_tray"))
     for i in range(1, 7):  # 조립 줄: A1 이 사람에게 가장 가까움
         out.append(
-            Slot(f"A{i}", f"조립 줄 {i}", "assembly", (302.0 - i * 22, -40.0, 0.0), (20.0, 36.0))
+            Slot(f"A{i}", f"조립 줄 {i}", "assembly", (302.0 - i * 22, 260.0, 0.0), (20.0, 36.0))
         )
-    out.append(Slot("Z", "건넴 구역", "handover_zone", (320.0, -190.0, 0.0), (120.0, 140.0)))
-    out.append(Slot("H", "전달", "handover", (290.0, -200.0, 0.0), (44.0, 44.0)))
-    out.append(Slot("R", "반납", "return", (290.0, 120.0, 0.0), (40.0, 40.0)))
+    out.append(Slot("Z", "건넴 구역", "handover_zone", (320.0, 110.0, 0.0), (120.0, 140.0)))
+    out.append(Slot("H", "전달", "handover", (290.0, 100.0, 0.0), (44.0, 44.0)))
+    out.append(Slot("R", "반납", "return", (290.0, 420.0, 0.0), (40.0, 40.0)))
     return out
 
 
@@ -129,7 +130,7 @@ def add_slot(slots: list[Slot], prefix: str = "S") -> list[Slot]:
     n = 1
     while f"{prefix}{n}" in used:
         n += 1
-    return slots + [Slot(f"{prefix}{n}", "", "storage", (150.0, 0.0, 0.0), (40.0, 40.0))]
+    return slots + [Slot(f"{prefix}{n}", "", "storage", (150.0, 300.0, 0.0), (40.0, 40.0))]
 
 
 def delete(slots: list[Slot], slot_id: str) -> list[Slot]:
@@ -161,12 +162,12 @@ def in_reach(slot: Slot, radius_mm: float, robots: dict | None = None) -> bool:
 
 
 def outside_table(slots: list[Slot], table_mm: tuple[float, float] = TABLE_MM) -> list[str]:
-    """작업대(앞뒤 0~table_mm[0], 좌우 ±table_mm[1]/2) 밖으로 나간 칸 ID 목록."""
-    depth, half = table_mm[0], table_mm[1] / 2
+    """작업대(앞뒤 0~table_mm[0], 좌우 0~table_mm[1]) 밖으로 나간 칸 ID 목록."""
+    depth, width = table_mm
     return [
         s.id
         for s in slots
-        if any(not (0 <= cx <= depth and -half <= cy <= half) for cx, cy in _corners(s))
+        if any(not (0 <= cx <= depth and 0 <= cy <= width) for cx, cy in _corners(s))
     ]
 
 

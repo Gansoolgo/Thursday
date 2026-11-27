@@ -49,7 +49,7 @@ def test_default_layout_is_inside_reach():
 
 
 def test_slot_moved_far_forward_is_out_of_reach():
-    moved = sl.move(sl.default_slots(), "S1", x=440, y=0)  # 사람 쪽 끝 가운데: 두 팔 모두 멀다
+    moved = sl.move(sl.default_slots(), "S1", x=440, y=300)  # 사람 쪽 끝 가운데: 두 팔 모두 멀다
     assert not sl.in_reach(sl.get(moved, "S1"), 330)
 
 
@@ -60,15 +60,15 @@ def test_table_is_60_by_45_cm():
 
 def test_default_layout_is_on_the_table_and_off_table_is_found():
     assert sl.outside_table(sl.default_slots()) == []
-    moved = sl.move(sl.default_slots(), "S2", x=470, y=0)
+    moved = sl.move(sl.default_slots(), "S2", x=470, y=300)
     assert sl.outside_table(moved) == ["S2"]
 
 
 def test_reach_by_names_which_arm_reaches():
-    # 로봇 A = 사람 쪽에서 볼 때 왼쪽 뒤 (y 음수), B = 오른쪽 뒤 (y 양수)
-    near_b = sl.Slot("Q1", "", "storage", (120.0, 250.0, 0.0), (40.0, 40.0))
+    # 원점 = 매트 모서리(D-16, 임시로 로봇 A 쪽 뒤 모서리). A = 왼쪽 뒤 y 150, B = 오른쪽 뒤 y 450
+    near_b = sl.Slot("Q1", "", "storage", (120.0, 550.0, 0.0), (40.0, 40.0))
     assert sl.reach_by(near_b, 330) == ["B"]
-    middle = sl.Slot("Q2", "", "storage", (150.0, 0.0, 0.0), (40.0, 40.0))
+    middle = sl.Slot("Q2", "", "storage", (150.0, 300.0, 0.0), (40.0, 40.0))
     assert sl.reach_by(middle, 330) == ["A", "B"]
 
 
