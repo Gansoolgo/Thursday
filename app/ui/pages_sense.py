@@ -161,7 +161,7 @@ def coord() -> None:
     v = c2.number_input("v (픽셀)", 0, 479, 240)
     label = c3.text_input("이름", placeholder="트레이 모서리")
     if c4.button("저장", type="primary"):
-        x, y = round(450 - v / 480 * 450), round((u - 320) / 320 * 300)
+        x, y = round(450 - v / 480 * 450), round(u / 640 * 600)
         d["coords"].append(
             {
                 "t": w.now(),
@@ -214,7 +214,7 @@ def hand() -> None:
                     if k == "none"
                     else [
                         random.randint(280, 330),
-                        random.randint(-220, -170),
+                        random.randint(80, 130),
                         random.randint(90, 140),
                     ],
                 }
