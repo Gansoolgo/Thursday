@@ -548,7 +548,7 @@ def build_act(act: str, task: str, rng: random.Random) -> dict:
             "건넴 구역에 손",
             None,
             [
-                SEE("건넴 구역에 손 · 3.0초 멈춤 · (300, -190, 120) mm"),
+                SEE("건넴 구역에 손 · 3.0초 멈춤 · (300, 110, 120) mm"),
                 TH("D-08: 손 위 5cm 에서 놓기 (저속)"),
                 PL("hand_over(block_green, on_hand)"),
                 GT(),
