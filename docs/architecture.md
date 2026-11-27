@@ -29,7 +29,7 @@
 flowchart TD
     subgraph Input[입력]
         U[사용자 명령<br/>텍스트 · 선택: 음성]
-        C[웹캠 영상]
+        C[깊이 카메라 2대 HP60C<br/>+ 손목 카메라]
     end
 
     subgraph Perception[인식]
@@ -101,8 +101,9 @@ flowchart LR
         end
         UI[대시보드<br/>Streamlit]
     end
-    CAM[웹캠] -->|USB| PC
-    PC -->|USB 직렬| ARM[SO-101 팔로워]
+    CAM[HP60C 깊이 카메라 ×2<br/>상부·측면] -->|USB| PC
+    WCAM[손목 카메라 ×1~2] -->|USB| PC
+    PC -->|USB 직렬| ARM[SO-101 팔로워 ×2]
     ESTOP[비상 정지 버튼] --> PC
 ```
 
