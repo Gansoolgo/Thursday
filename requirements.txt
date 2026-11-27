@@ -15,3 +15,9 @@ PyYAML==6.0.4
 # ── Vision (박휘성) — #37 HP60C, #7 OpenVINO ──
 
 # ── GenAI (김효신) — #6 언어 모델, #29 음성 인식 ──
+# #6: 노트북 CPU·GPU·NPU에서 설치·실행 확인 (11/27). openvino·tokenizers는 genai와 같은 버전이어야 함
+openvino-genai==2026.4.1.0
+openvino==2026.4.1
+openvino-tokenizers==2026.4.1.0
+# 모델 내려받기용 (hf download). 모델 파일은 저장소 밖 C:\models에 둔다
+huggingface_hub==2.5.0
