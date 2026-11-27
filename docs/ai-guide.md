@@ -28,7 +28,7 @@
 | 칸 | 쓰는 것 | 나쁜 예 → 좋은 예 |
 |---|---|---|
 | **① 목표** | 한 문장. 무엇을 왜 | "전달 기능" → "물건을 전달 칸 H에 놓는 `hand_over` Skill을 만든다 (US-03)" |
-| **② 입력 / 출력** | 함수 모양, 데이터 형식, **예시 값** | "World State 받아서 처리" → "`execute(step: PlanStep, world: WorldState) -> SkillResult`, interfaces.md 5장. 예: step=`{skill: hand_over, object_id: resistor_220_0}` → `status=SUCCESS, observations={placed_slot: H}`" |
+| **② 입력 / 출력** | 함수 모양, 데이터 형식, **예시 값** | "World State 받아서 처리" → "`execute(step: PlanStep, world: WorldState) -> SkillResult`, interfaces.md 5장. 예: step=`{skill: hand_over, object_id: block_blue_0}` → `status=SUCCESS, observations={placed_slot: H}`" |
 | **③ 수정할 파일** | 만들거나 고칠 파일 목록 | (없음) → "`app/skills/hand_over.py`(새로), `tests/test_hand_over.py`(새로)" |
 | **④ 건드리지 말 것** | 바꾸면 안 되는 것 | (없음) → "`app/core/types.py` 수정 금지, 실제 로봇 실행 금지, 새 패키지 설치 금지" |
 | **⑤ 완료 조건** | **테스트로 확인할 수 있는** 문장 | "잘 동작" → "① H가 비면 SUCCESS ② H가 차 있으면 FAILED + `SLOT_OCCUPIED` ③ 물건이 없으면 `OBJECT_NOT_FOUND` ④ MockRobotArm으로 pytest 통과" |

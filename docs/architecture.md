@@ -227,7 +227,9 @@ classDiagram
 
 ## 5. 시퀀스 다이어그램
 
-### 5-1. 작업 중 보조: "저항 줘"
+### 5-1. 작업 중 보조: 직접 요청 "○○ 줘"
+
+> 아래는 사용자가 직접 요청하는 흐름입니다. 블록 작업의 순서대로 건네기·순서 이탈 감지 흐름은 [workspace.md](plan/workspace.md) 5장, 전달 방식은 [decisions.md](plan/decisions.md) D-08을 따릅니다.
 
 ```mermaid
 sequenceDiagram
@@ -238,7 +240,7 @@ sequenceDiagram
     participant Gate as Safety Gate
     participant Arm as SO-101
 
-    User->>App: "저항 줘"
+    User->>App: "블록 하나 줘"
     App->>Vision: 최신 상태 요청
     Vision-->>App: WorldState
     App->>Planner: 목표 + WorldState + Skill 목록
@@ -246,19 +248,24 @@ sequenceDiagram
     App->>Gate: validate(Plan, WorldState)
     alt 후보가 여러 개
         Gate-->>App: 질문 필요
-        App-->>User: "220Ω, 1kΩ 중 어느 거요?"
-        User->>App: "1kΩ"
+        App-->>User: "노랑, 주황 중 어느 거요?"
+        User->>App: "노랑"
         App->>Planner: 답변 반영해 재계획
         Planner-->>App: Plan JSON
         App->>Gate: validate
     end
     alt 통과
         Gate-->>App: OK
-        App->>Arm: hand_over(resistor_1k)
-        Arm-->>App: 동작 완료
+        App->>Arm: hand_over(block_yellow)
+        Arm-->>App: 건넴 위치 도착
+        App->>Vision: 건넴 구역에 멈춘 손이 있나 (D-08)
+        alt 3~4초 안에 손 있음
+            App->>Arm: 손 위 몇 cm에서 놓기 (저속)
+        else 손 없음
+            App->>Arm: 전달 칸 H에 놓기
+        end
         App->>Vision: 결과 확인
-        Vision-->>App: H 칸에 저항 있음
-        App-->>User: "전달 위치에 놓았어요"
+        App-->>User: "노랑 블록 드렸어요"
     else 거절
         Gate-->>App: 거절 + 이유
         App-->>User: 이유 안내 (실행 안 함)
@@ -332,8 +339,8 @@ flowchart LR
         E[Planner · Safety Gate · Action Manager<br/>Optimizer · Skill 구현]
     end
     subgraph Swap[교체: 데이터만]
-        T1[tasks/led_lab.yaml<br/>전자회로 실습]
-        T2[tasks/color_class.yaml<br/>색깔 수업]
+        T1[tasks/block_a.yaml<br/>블록 작업]
+        T2[tasks/fold_cloth.yaml<br/>손수건 개기]
         T3[tasks/새 작업.yaml]
         OBJ[objects.yaml<br/>물건 목록]
     end
@@ -348,10 +355,10 @@ flowchart LR
 작업 설명서 예시 (초안):
 
 ```yaml
-task_id: led_lab
-name: LED 회로 실습
-required_objects: [breadboard, led_red, resistor_220, jumper_wires, battery_holder]
-notes: 저항은 LED 바로 옆에 둔다
+task_id: block_a
+name: 블록 작업 A안
+required_objects: [block_tray, block_blue, block_yellow, block_orange, block_red, block_green, block_white]
+notes: 사용자 쪽 칸(A1)부터 먼 쪽으로 순서대로 놓는다   # 전체 초안은 plan/workspace.md 4장
 ```
 
 ## 8. 안전 설계
