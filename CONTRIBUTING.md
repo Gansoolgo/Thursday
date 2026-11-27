@@ -117,10 +117,24 @@
 ## 6. 공통 파일과 로봇
 
 - **공통 파일**은 바꾸기 전에 Discord에 먼저 알립니다. 여러 사람 코드가 동시에 영향을 받습니다.
-- **로봇은 한 대.** 쓰기 전에 Discord에 "로봇 사용 14:00~15:00 (#10)".
+- **로봇은 팔 2대를 같이 씁니다** (양팔 작업도 있음). 쓰기 전에 Discord에 "로봇 사용 14:00~15:00 (#10)".
 - 로봇이 없을 때는 `MockRobotArm`([interfaces.md 5장](docs/interfaces.md#5-skill과-실행-결과))으로 개발합니다.
 - 실제 시험 순서: **mock → 저속·제한 동작 → 정상 속도.** 작동 중에는 작업 영역에 손을 넣지 않습니다.
 - 보정값·칸 좌표(`config/slots.yaml`)를 바꾸면 PR로 올리고 Discord에 알립니다.
+
+### 폴더 주인
+
+각자 **자기 폴더에만** 코드를 넣으면 git 충돌이 거의 나지 않습니다. 남의 폴더를 고쳐야 하면 그 주인에게 먼저 말합니다. 폴더를 고친 PR은 [CODEOWNERS](.github/CODEOWNERS)에 따라 주인에게 리뷰 요청이 자동으로 갑니다.
+
+| 폴더 | 주인 |
+|---|---|
+| `app/skills/`, `app/hw/` | 구경윤 · 신재석 (Robotics) |
+| `app/vision/`, `config/` | 박휘성 (Vision) |
+| `app/core/` 의 planner · safety_gate · optimizer | 김효신 (GenAI) |
+| `app/core/` 의 types · world_state · action_manager | 신재석 (System) |
+| `app/ui/`, `tasks/`, `samples/` | 4명 (M3) |
+
+**공통 파일** (바꾸기 전에 Discord에 알리고 리뷰 1명): `app/core/types.py`, `docs/interfaces.md`, `config/*.yaml`, `requirements.txt`
 
 ## 7. 소통 (Discord)
 
