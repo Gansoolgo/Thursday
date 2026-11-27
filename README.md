@@ -116,12 +116,12 @@ flowchart LR
 
 ## 팀
 
-| 역할 | 주요 담당 | 담당자 |
-|---|---|---|
-| System Architect | 요구사항, 인터페이스 규격, 통합, 일정 | 추후 결정 ([#1](https://github.com/Gansoolgo/Thursday/issues/1)) |
-| Vision Engineer | Geti 학습, 추론, 좌표 보정, 결과 확인 | 추후 결정 |
-| GenAI Engineer | 로컬 LLM, JSON 계획, Safety Gate | 추후 결정 |
-| Robotics Engineer | SO-101, IK pick/place, 안전 정지, 최적 배치 | 추후 결정 |
+| 역할 | 주요 담당 | 담당자 | 팀 |
+|---|---|---|---|
+| Robotics Engineer | SO-101, IK pick/place, 손수건, 안전 정지 | 구경윤 ([@praykoo-cloud](https://github.com/praykoo-cloud)) · 신재석 ([@GodOfSeok](https://github.com/GodOfSeok)) | 🔧 하드웨어 |
+| Vision Engineer | 깊이 카메라, Geti 학습, 추론, 좌표 보정 | 박휘성 ([@hwihwi-edu](https://github.com/hwihwi-edu)) | 💻 소프트웨어 |
+| GenAI Engineer | 음성 인식, 로컬 LLM, JSON 계획, Safety Gate, 정리 최적화 | 김효신 ([@Hyoshin2](https://github.com/Hyoshin2)) | 💻 소프트웨어 |
+| System (나눠 맡음) | 준비물·장비, 공통 타입·Mock: 신재석 / 동시 실행 측정: 박휘성·김효신 / 인터페이스 합의·통합: 4명 | — | — |
 
 ## 현재 상태
 
