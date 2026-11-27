@@ -11,5 +11,9 @@ target-version = "py312"
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "B", "UP"]
 
+[tool.ruff.lint.per-file-ignores]
+# 기술 검증용 시험 코드: 한글 표 출력·SVG 문자열이 길어서 줄 길이만 풀어 줌 (app/ 코드는 그대로 엄격)
+"spikes/**" = ["E501", "E731"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -22,6 +22,15 @@ data/raw/
 outputs/
 logs/
 
+# HP60C 제조사 SDK(독점 라이선스)와 시험 결과물
+spikes/hp60c/sdk_include/
+**/snapshots/
+spikes/camera_placement/*.svg
+*.obj
+*.exp
+*.lib
+*.def
+
 # IDE·OS
 .vscode/
 .idea/
