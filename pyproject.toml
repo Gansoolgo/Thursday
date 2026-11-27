@@ -9,11 +9,13 @@ line-length = 100
 target-version = "py312"
 
 [tool.ruff.lint]
-select = ["E", "F", "W", "I", "B", "UP"]
+# PTH: os.path·문자열 경로 대신 pathlib을 쓰게 함 (D-17, Pi 이식)
+select = ["E", "F", "W", "I", "B", "UP", "PTH"]
 
 [tool.ruff.lint.per-file-ignores]
 # 기술 검증용 시험 코드: 한글 표 출력·SVG 문자열이 길어서 줄 길이만 풀어 줌 (app/ 코드는 그대로 엄격)
-"spikes/**" = ["E501", "E731"]
+# PTH도 spikes는 제외 (이미 동작하는 시험 코드를 이 PR에서 고치지 않음)
+"spikes/**" = ["E501", "E731", "PTH"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
