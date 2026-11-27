@@ -1,0 +1,14 @@
+# 실행용 패키지 (개발 도구는 requirements-dev.txt)
+# 규칙
+# - M1 spike에서 실제로 설치·동작을 확인한 버전만 == 로 고정해서 추가한다 (추측 버전 금지).
+# - 자기 역할 구역에만 줄을 추가한다. 같은 줄을 여러 사람이 고치지 않게 하려는 것.
+# - 패키지를 추가한 PR 본문에 "requirements.txt 변경"을 적고 Discord에 알린다.
+# 설치: python -m pip install -r requirements.txt
+
+# ── 공통 (System: 신재석) ─────────────────────────
+
+# ── Robotics (구경윤·신재석) — #3 결과로 lerobot 버전 고정 ──
+
+# ── Vision (박휘성) — #37 HP60C, #7 OpenVINO ──
+
+# ── GenAI (김효신) — #6 언어 모델, #29 음성 인식 ──

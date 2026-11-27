@@ -1,0 +1,22 @@
+# 폴더별 담당자. 이 폴더를 고친 PR이 올라오면 담당자에게 리뷰 요청이 자동으로 간다.
+# (승인은 담당자가 아니어도 팀원 1명이면 된다 — D-10)
+# 아래쪽 줄이 위쪽 줄보다 우선한다.
+
+# 기본: 4명
+*                       @GodOfSeok @praykoo-cloud @hwihwi-edu @Hyoshin2
+
+# Robotics
+/app/skills/            @praykoo-cloud @GodOfSeok
+/app/hw/                @praykoo-cloud @GodOfSeok
+
+# Vision
+/app/vision/            @hwihwi-edu
+/config/                @hwihwi-edu
+
+# 두뇌·실행 관리 (GenAI·System)
+/app/core/              @Hyoshin2 @GodOfSeok
+
+# 공통 파일: 4명 모두에게 영향 → 4명
+/app/core/types.py      @GodOfSeok @praykoo-cloud @hwihwi-edu @Hyoshin2
+/docs/interfaces.md     @GodOfSeok @praykoo-cloud @hwihwi-edu @Hyoshin2
+/requirements.txt       @GodOfSeok @praykoo-cloud @hwihwi-edu @Hyoshin2
